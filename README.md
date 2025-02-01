@@ -4,7 +4,9 @@ NSDQ
 - Interacts with the NASDAQ API to retrieve asset-related data (quotes, historical data, option chains, etc.).
 - Retrieves real-time trade data and both raw and processed option chain data.
 - Calculates implied volatility and option Greeks using pricing models (e.g., Black-Scholes-Merton).
-- Provides a dedicated class to generate and plot the implied volatility surface using spline smoothing.
+- Provides a dedicated class to generate and plot the implied volatility surface using spline smoothing.  
+
+- Guide is available <a href="https://github.com/ndjoli-nathan/NSDQ/blob/main/Guide.ipynb">here.</a>
 
 ---
  
