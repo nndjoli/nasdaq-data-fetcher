@@ -57,3 +57,7 @@ IVS.Plot(
     BoxAspect=(36, 36, 18),
     ShowScatter=True
 )
+```
+<p align="center">
+  <img src="https://github.com/ndjoli-nathan/NSDQ/blob/main/GIF.gif" alt="GIF" />
+</p>
