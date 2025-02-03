@@ -48,7 +48,7 @@ class Asset:
         """Returns the asset's real-time data."""
         return self._Data.Realtime(NumberOfTrades)
 
-    def Options(self, DataType: str = "processed", ExchangeCode: str = "oprac", Strategy: str = "callput", RiskFreeRate: float = 0.045):
+    def Options(self, DataType: str = "processed", ExchangeCode: str = "oprac", Strategy: str = "callput", RiskFreeRate: float = None):
         """
         Returns the asset's option chain data.
 
