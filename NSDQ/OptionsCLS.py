@@ -20,7 +20,7 @@ class OC:
     def __init__(self, Data: "pandas.DataFrame"):
 
         self.Data = Data
-        self.Asset = Data["Underlying Symbol"].iloc[0]
+        self.Asset = Data.get("Underlying Symbol").iloc[0] if "Underlying Symbol" in Data.columns else None
 
     def Plot2D(self, x: str = None, Type: str = None, StrikeRange: list = None, YToExpiryRange: list = None):
         """
@@ -41,6 +41,9 @@ class OC:
             StrikeRange (list, optional): [min, max] range to filter the 'Contract Strike' column.
             YToExpiryRange (list, optional): [min, max] range to filter the 'Years Until Expiry' column.
         """
+        if "Years Until Expiry" not in self.Data.columns:
+            raise Exception("Plotting functions are only available for Processed DataFrames.")
+
         sns.set_style("darkgrid")
         Data = self.Data.copy()
         if Type:
@@ -147,6 +150,9 @@ class OC:
             BoxAspect (tuple, optional): Aspect ratio of the 3D plot.
             ShowScatter (bool, optional): Whether to display the original Data points.
         """
+        if "Years Until Expiry" not in self.Data.columns:
+            raise Exception("Plotting functions are only available for Processed DataFrames.")
+
         sns.set_style("whitegrid")
 
         Data = self.Data.copy()
@@ -194,16 +200,24 @@ class OC:
             if ShowScatter:
                 ax.scatter(ExpiryGrid, StrikeGrid, Z, color="black", marker="+", s=5)
 
-            Asset = Data["Underlying Symbol"].iloc[0]
+            Asset = Data["Underlying Symbol"].iloc[0] if "Underlying Symbol" in Data.columns else None
             if Column == "Contract Last":
                 Column = "Option Price"
             if Data["Contract Type"].unique().size == 1:
                 Type = Data["Contract Type"].unique()[0]
-                ax.set_title(
-                    f"{Asset} {Type} {Column} over Time to Expiry and Strike Price ({datetime.datetime.today().strftime('%B %d, %Y')}) for {Type} Options"
-                )
+                if Asset:
+                    ax.set_title(
+                        f"{Asset} {Type} {Column} over Time to Expiry and Strike Price ({datetime.datetime.today().strftime('%B %d, %Y')})"
+                    )
+                else:
+                    ax.set_title(f"{Column} over Time to Expiry and Strike Price ({datetime.datetime.today().strftime('%B %d, %Y')})")
             else:
-                ax.set_title(f"{Asset} {Column} over Time to Expiry and Strike Price ({datetime.datetime.today().strftime('%B %d, %Y')})")
+                if Asset:
+                    ax.set_title(
+                        f"{Asset} {Column} over Time to Expiry and Strike Price ({datetime.datetime.today().strftime('%B %d, %Y')})"
+                    )
+                else:
+                    ax.set_title(f"{Column} over Time to Expiry and Strike Price ({datetime.datetime.today().strftime('%B %d, %Y')})")
             return Surface
 
         if x:
