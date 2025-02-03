@@ -430,7 +430,10 @@ def ChainGreeks(Chain, Model):
     else:
         q = 0
 
-    Greeks = vollib.get_all_greeks(Flag, S, K, T, r, sigma, q, model=Model)
+    if np.all(q == 0):
+        Greeks = vollib.get_all_greeks("c", S, K, T, r, sigma, None, model="black_scholes")
+    else:
+        Greeks = vollib.get_all_greeks(Flag, S, K, T, r, sigma, q, model=Model)
 
     Chain["Delta"] = Greeks["delta"]
     Chain["Gamma"] = Greeks["gamma"]
