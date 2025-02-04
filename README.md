@@ -10,7 +10,7 @@
 <h2>Requirements & Installation :</h2>
 
 - Requirements: `requests`, `datetime`, `pandas`, `numpy`, `scipy`, `py_vollib_vectorized`, `matplotlib`, `re`.  
-- Install using: `pip install NSDQ`
+- Install using: `pip install NSDQ` (https://pypi.org/project/NSDQ/)
  
 <h2>Example:</h2>
 
