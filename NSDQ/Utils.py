@@ -431,7 +431,7 @@ def ChainGreeks(Chain, Model):
         q = 0
 
     if np.all(q == 0):
-        Greeks = vollib.get_all_greeks("c", S, K, T, r, sigma, None, model="black_scholes")
+        Greeks = vollib.get_all_greeks(Flag, S, K, T, r, sigma, None, model="black_scholes")
     else:
         Greeks = vollib.get_all_greeks(Flag, S, K, T, r, sigma, q, model=Model)
 
