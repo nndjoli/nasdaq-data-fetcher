@@ -22,11 +22,11 @@ class OC:
         self.Data = Data
         self.Asset = Data.get("Underlying Symbol").iloc[0] if "Underlying Symbol" in Data.columns else None
 
-    def Plot2D(self, x: str = None, Type: str = None, StrikeRange: list = None, YToExpiryRange: list = None):
+    def Plot2D(self, z: str = None, Type: str = None, StrikeRange: list = None, YToExpiryRange: list = None):
         """
-        Plots in 2D the specified variable 'x' as a function of strike and time until expiry.
+        Plots in 2D the specified variable 'z' as a function of strike and time until expiry.
 
-        If 'x' is None, plots the following 7 variables in separate subplots:
+        If 'z' is None, plots the following 7 variables in separate subplots:
             - Option Price ("Contract Last Price")
             - Implied Volatility ("Implied Volatility")
             - Delta
@@ -36,7 +36,7 @@ class OC:
             - Rho
 
         Parameters:
-            x (str, optional): The variable to plot (e.g., 'Delta', 'Implied Volatility', etc.).
+            z (str, optional): The variable to plot (e.g., 'Delta', 'Implied Volatility', etc.).
             Type (str, optional): Filter by option type (e.g., 'Call' or 'Put').
             StrikeRange (list, optional): [min, max] range to filter the 'Contract Strike' column.
             YToExpiryRange (list, optional): [min, max] range to filter the 'Years Until Expiry' column.
@@ -68,10 +68,10 @@ class OC:
             "rho": "Rho",
         }
 
-        if x:
-            Key = x.lower().strip()
+        if z:
+            Key = z.lower().strip()
             if Key not in Mapping:
-                raise ValueError("x must be one of: 'option price', 'implied volatility', 'delta', 'gamma', 'theta', 'vega', 'rho'")
+                raise ValueError("z must be one of: 'option price', 'implied volatility', 'delta', 'gamma', 'theta', 'vega', 'rho'")
             Column = Mapping[Key]
             Grouped = Data.groupby(["Expiry (Months)", "Strike (rounded10)"])[Column].mean().reset_index().dropna()
 
@@ -112,7 +112,7 @@ class OC:
 
     def Plot3D(
         self,
-        x: str = None,
+        z: str = None,
         Type: str = "Call",
         StrikeRange: tuple = None,
         YToExpiryRange: tuple = None,
@@ -125,9 +125,9 @@ class OC:
         ShowScatter: bool = True,
     ):
         """
-        Plots in 3D the specified variable 'x' as a function of strike and time until maturity.
+        Plots in 3D the specified variable 'z' as a function of strike and time until maturity.
 
-        If 'x' is specified, a single 3D plot is displayed. If 'x' is None, 3D plots for the following 7 Variables are shown,
+        If 'z' is specified, a single 3D plot is displayed. If 'z' is None, 3D plots for the following 7 Variables are shown,
         each in its own subplot:
             - Option Price ("Contract Last Price")
             - Implied Volatility ("Implied Volatility")
@@ -138,7 +138,7 @@ class OC:
             - Rho
 
         Parameters:
-            x (str, optional): The variable to plot (e.g., 'delta', 'implied volatility', etc.). If None, plots all Variables.
+            z (str, optional): The variable to plot (e.g., 'delta', 'implied volatility', etc.). If None, plots all Variables.
             Type (str, optional): Filter by option type (e.g., 'Call' or 'Put'). If None, plots both.
             StrikeRange (tuple, optional): (min, max) range to filter the 'Contract Strike' column.
             YToExpiryRange (tuple, optional): (min, max) range to filter the 'Years Until Expiry' column.
@@ -220,10 +220,10 @@ class OC:
                     ax.set_title(f"{Column} over Time to Expiry and Strike Price ({datetime.datetime.today().strftime('%B %d, %Y')})")
             return Surface
 
-        if x:
-            Key = x.lower().strip()
+        if z:
+            Key = z.lower().strip()
             if Key not in Mapping:
-                raise ValueError("x must be one of: 'option price', 'implied volatility', 'delta', 'gamma', 'theta', 'vega', 'rho'")
+                raise ValueError("z must be one of: 'option price', 'implied volatility', 'delta', 'gamma', 'theta', 'vega', 'rho'")
             Column = Mapping[Key]
             Figure = plt.figure(figsize=FigSize)
             ax = Figure.add_subplot(111, projection="3d")
