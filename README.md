@@ -9,7 +9,7 @@
 
 <h2>Requirements & Installation :</h2>
 
-- Requirements: `requests`, `datetime`, `pandas`, `numpy`, `scipy`, `py_vollib_vectorized`, `matplotlib`, `re`.  
+- Requirements: `pandas`, `requests`, `pandas`, `numpy`, `scipy`, `matplotlib`, `seaborn`.  
 - Install using: `pip install nasdaqFetcher` (https://pypi.org/project/nasdaqFetcher/1.0.0/)
  
 <h2>Example:</h2>
@@ -18,47 +18,47 @@
 import nasdaqFetcher
 
 # Retrieve asset information (e.g., for AAPL)
-Apple = nasdaqFetcher.Asset("AAPL", "stocks")
-print(Apple.Informations())
+aapl = nasdaqFetcher.Asset("AAPL", "stocks")
+print(aapl.get_informations())
 # >>> {'Symbol': 'AAPL', 'Exchange': 'NASDAQ', 'Sector': 'Technology', ...}
 
 # Get the asset's historical data as a DataFrame
-historical_data = Apple.HistoricalData()
+historical_data = aapl.get_historical_data()
 print(historical_data.head())
 
 # Retrieve the most recent real-time trades (e.g., the last 5 trades)
-RealtimeTrades = Apple.RealTime(NumberOfTrades=5)
-print(RealtimeTrades)
+realtime_trades = aapl.get_real_time_trades(number_of_trades=5)
+print(realtime_trades)
 
 # Retrieve the processed option chain data (for both calls and puts)
-Options = Apple.Options(
-    DataType="processed", 
-    ExchangeCode="oprac", 
-    Strategy="callput", 
-    RiskFreeRate=0.04375,
+options_chain = aapl.get_options_chain(
+    data_format="processed", 
+    exchange="oprac", 
+    option_strategy="callput", 
+    risk_free_interest_rate=0.045,
 )
-print(OptionsChain.Data.head())
+print(options_chain.data.head())
 ```
 
 ```python
 
 # Create and display 2D plots of Greeks vs Strike & Time to Expiry:
-Options.Plot2D(Type='call')
+options_chain.plot_2d(option_type='call')
 
 ```
 <p align="center">
-  <img src="https://github.com/nndjoli/nasdaqFetcher/blob/main/Misc/Output2D.png" />
+  <img src="https://github.com/nndjoli/nasdaqFetcher/blob/main/miscellaneous/Output2D.png" />
 </p>
 
 ```python
 
 # Create and display 3D plots of Greeks vs Strike & Time to Expiry:
-Options.Plot3D(Type='call', ViewAngle=(15,45))
+Options.Plot3D(option_type='call', viewing_angle=(15,45))
 
 ```
 
 <p align="center">
-  <img src="https://github.com/nndjoli/nasdaqFetcher/blob/main/Misc/Output3D.png" />
+  <img src="https://github.com/nndjoli/nasdaqFetcher/blob/main/miscellaneous/Output3D.png" />
 </p>
 
 
