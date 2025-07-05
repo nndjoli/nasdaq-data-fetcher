@@ -1,24 +1,24 @@
-<h1>NSDQ</h1> 
+<h1>nasdaqFetcher</h1> 
 
 - Interacts with the NASDAQ API to retrieve asset-related data (quotes, historical data, option chains, etc.).
 - Retrieves real-time trade data and both raw and processed option chain data.
 - Calculates implied volatility and option Greeks using pricing models (e.g., Black-Scholes-Merton).
 - Provides dedicated functions to plot 2D & 3D representations of Greeks, option prices & implied volatilities over strike and time to expiry.
 
-- Guide is available <a href="https://github.com/ndjoli-nathan/NSDQ/blob/main/Guide.ipynb">here.</a>
+- Guide is available <a href="https://github.com/nndjoli/nasdaqFetcher/blob/main/Guide.ipynb">here.</a>
 
 <h2>Requirements & Installation :</h2>
 
 - Requirements: `requests`, `datetime`, `pandas`, `numpy`, `scipy`, `py_vollib_vectorized`, `matplotlib`, `re`.  
-- Install using: `pip install NSDQ` (https://pypi.org/project/NSDQ/)
+- Install using: `pip install nasdaqFetcher` (https://pypi.org/project/nasdaqFetcher/1.0.0/)
  
 <h2>Example:</h2>
 
 ```python
-import NSDQ
+import nasdaqFetcher
 
 # Retrieve asset information (e.g., for AAPL)
-Apple = NSDQ.Asset("AAPL", "stocks")
+Apple = nasdaqFetcher.Asset("AAPL", "stocks")
 print(Apple.Informations())
 # >>> {'Symbol': 'AAPL', 'Exchange': 'NASDAQ', 'Sector': 'Technology', ...}
 
@@ -47,7 +47,7 @@ Options.Plot2D(Type='call')
 
 ```
 <p align="center">
-  <img src="https://github.com/ndjoli-nathan/NSDQ/blob/main/Misc/Output2D.png" />
+  <img src="https://github.com/nndjoli/nasdaqFetcher/blob/main/Misc/Output2D.png" />
 </p>
 
 ```python
@@ -58,7 +58,7 @@ Options.Plot3D(Type='call', ViewAngle=(15,45))
 ```
 
 <p align="center">
-  <img src="https://github.com/ndjoli-nathan/NSDQ/blob/main/Misc/Output3D.png" />
+  <img src="https://github.com/nndjoli/nasdaqFetcher/blob/main/Misc/Output3D.png" />
 </p>
 
 
