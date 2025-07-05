@@ -5,7 +5,7 @@
 - Calculates implied volatility and option Greeks using pricing models (e.g., Black-Scholes-Merton).
 - Provides dedicated functions to plot 2D & 3D representations of Greeks, option prices & implied volatilities over strike and time to expiry.
 
-- Guide is available <a href="https://github.com/nndjoli/nasdaqFetcher/blob/main/Guide.ipynb">here.</a>
+- Guide is available <a href="https://github.com/nndjoli/nasdaqFetcher/blob/main/docs/get_started.ipynb">here.</a>
 
 <h2>Requirements & Installation :</h2>
 
