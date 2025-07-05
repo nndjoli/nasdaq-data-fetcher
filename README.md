@@ -53,7 +53,7 @@ options_chain.plot_2d(option_type='call')
 ```python
 
 # Create and display 3D plots of Greeks vs Strike & Time to Expiry:
-Options.Plot3D(option_type='call', viewing_angle=(15,45))
+options_chain.plot_3d(option_type='call', viewing_angle=(15,45))
 
 ```
 
